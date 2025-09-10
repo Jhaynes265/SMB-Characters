@@ -96,7 +96,14 @@ else
                     // input game character first appeared in
                     Console.WriteLine("Enter year character first appeared:");
                     string? YearCreated2 = Console.ReadLine();
-                    Console.WriteLine($"{Id}, {Name}, {Description}, {Species2}, {FirstAppeared2}, {YearCreated2}");
+                    if (UInt64.TryParse(YearCreated2, out UInt64 year))
+                    {
+                        Console.WriteLine($"{Id}, {Name}, {Description}, {Species2}, {FirstAppeared2}, {YearCreated2}");
+                    }
+                    else
+                    {
+                        logger.Error("You must enter a year");
+                    }
                 }
             }
             else
