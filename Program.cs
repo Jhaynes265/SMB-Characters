@@ -87,7 +87,10 @@ else
                     // input character description
                     Console.WriteLine("Enter description:");
                     string? Description = Console.ReadLine();
-                    Console.WriteLine($"{Id}, {Name}, {Description}");
+                    // input character Species
+                    Console.WriteLine("Enter Species:");
+                    string? Species2 = Console.ReadLine();
+                    Console.WriteLine($"{Id}, {Name}, {Description}, {Species2}");
                 }
             }
             else
