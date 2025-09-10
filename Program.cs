@@ -93,7 +93,10 @@ else
                     // input game character first appeared in
                     Console.WriteLine("Enter game character first appeared in:");
                     string? FirstAppeared2 = Console.ReadLine();
-                    Console.WriteLine($"{Id}, {Name}, {Description}, {Species2}, {FirstAppeared2}");
+                    // input game character first appeared in
+                    Console.WriteLine("Enter year character first appeared:");
+                    string? YearCreated2 = Console.ReadLine();
+                    Console.WriteLine($"{Id}, {Name}, {Description}, {Species2}, {FirstAppeared2}, {YearCreated2}");
                 }
             }
             else
