@@ -74,9 +74,6 @@ else
             string? Name = Console.ReadLine();
             if (!string.IsNullOrEmpty(Name))
             {
-                // generate id - use max value in Ids + 1
-                UInt64 Id = Ids.Max() + 1;
-                Console.WriteLine($"{Id}, {Name}");
                 // check for duplicate name
                 List<string> LowerCaseNames = Names.ConvertAll(n => n.ToLower());
                 if (LowerCaseNames.Contains(Name.ToLower()))
