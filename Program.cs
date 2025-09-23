@@ -14,15 +14,10 @@ if (!File.Exists(file))
 }
 else
 {
-    // create parallel lists of character details
+    // create list of character
     // lists are used since we do not know number of lines of data
-    List<UInt64> Ids = [];
-    List<string> Names = [];
-    List<string?> Descriptions = [];
-    List<string?> Species = [];
-    List<string?> FirstAppeared = [];
-    List<UInt64?> YearCreated = [];
-    // to populate the lists with data, read from the data file
+    // to populate the list with data, read from the data file
+    List<Character> characters = [];
     try
     {
         StreamReader sr = new(file);
@@ -33,20 +28,21 @@ else
             string? line = sr.ReadLine();
             if (line is not null)
             {
+                Character character = new();
                 // character details are separated with comma(,)
                 string[] characterDetails = line.Split(',');
                 // 1st array element contains id
-                Ids.Add(UInt64.Parse(characterDetails[0]));
+                character.Id = UInt64.Parse(characterDetails[0]);
                 // 2nd array element contains character name
-                Names.Add(characterDetails[1]);
+                character.Name = characterDetails[1];
                 // 3rd array element contains character description
-                Descriptions.Add(characterDetails[2]);
+                character.Description = characterDetails[2] ?? string.Empty;
                 // 4th array element contains character species
-                Species.Add(characterDetails[3]);
+                character.Species = characterDetails[3];
                 // 5th array element contains game character first appeared in
-                FirstAppeared.Add(characterDetails[4]);
+                character.Firstappearance = characterDetails[4];
                 // 6th array element contains year character was created
-                YearCreated.Add(UInt64.Parse(characterDetails[5]));
+                character.Yearcreated = UInt64.Parse(characterDetails[5]);
             }
         }
         sr.Close();
@@ -55,6 +51,7 @@ else
     {
         logger.Error(ex.Message);
     }
+    /*
     string? choice;
     do
     {
@@ -142,6 +139,7 @@ else
             }
         }
     } while (choice == "1" || choice == "2");
+    */
 }
 
 logger.Info("Program ended");
