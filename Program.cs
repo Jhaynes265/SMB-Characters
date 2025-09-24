@@ -43,6 +43,8 @@ else
                 character.Firstappearance = characterDetails[4];
                 // 6th array element contains year character was created
                 character.Yearcreated = UInt64.Parse(characterDetails[5]);
+
+                characters.Add(character);
             }
         }
         sr.Close();
@@ -51,7 +53,7 @@ else
     {
         logger.Error(ex.Message);
     }
-    /*
+    
     string? choice;
     do
     {
@@ -67,49 +69,43 @@ else
         if (choice == "1")
         {
             // Add Character
+            Character character = new();
             Console.WriteLine("Enter new character name: ");
-            string? Name = Console.ReadLine();
-            if (!string.IsNullOrEmpty(Name))
+            character.Name = Console.ReadLine() ?? string.Empty;
+            if (!string.IsNullOrEmpty(character.Name))
             {
                 // check for duplicate name
-                List<string> LowerCaseNames = Names.ConvertAll(n => n.ToLower());
-                if (LowerCaseNames.Contains(Name.ToLower()))
+                List<string> LowerCaseNames = characters.ConvertAll(character => character.Name.ToLower());
+                if (LowerCaseNames.Contains(character.Name.ToLower()))
                 {
-                    logger.Info($"Duplicate name {Name}");
+                    logger.Info($"Duplicate name {character.Name}");
                 }
                 else
                 {
                     // generate id - use max value in Ids + 1
-                    UInt64 Id = Ids.Max() + 1;
+                    character.Id = characters.Max(character => character.Id) + 1;
                     // input character description
                     Console.WriteLine("Enter character description:");
-                    string? Description = Console.ReadLine();
+                    character.Description = Console.ReadLine() ?? string.Empty;
                     // input character Species
                     Console.WriteLine("Enter character species:");
-                    string? Species2 = Console.ReadLine();
+                    character.Species = Console.ReadLine() ?? string.Empty;
                     // input game character first appeared in
                     Console.WriteLine("Enter game character first appeared in:");
-                    string? FirstAppeared2 = Console.ReadLine();
+                    character.Firstappearance = Console.ReadLine() ?? string.Empty;
                     // input game character first appeared in
                     Console.WriteLine("Enter year character first appeared:");
-                    string? YearCreated2 = Console.ReadLine();
-                    if (UInt64.TryParse(YearCreated2, out UInt64 year))
+                    character.Yearcreated = UInt64.Parse(Console.ReadLine() ?? string.Empty);
+                    if (UInt64.TryParse(character.Yearcreated.ToString(), out UInt64 year))
                     {
-                        //Console.WriteLine($"{Id}, {Name}, {Description}, {Species2}, {FirstAppeared2}, {YearCreated2}");
-
                         // create file from data
                         StreamWriter sw = new(file, true);
-                        sw.WriteLine($"{Id},{Name},{Description}, {Species2}, {FirstAppeared2}, {YearCreated2}");
+                        sw.WriteLine($"{character.Id},{character.Name},{character.Description}, {character.Species}, {character.Firstappearance}, {character.Yearcreated}");
                         sw.Close();
                         // add new character details to Lists
-                        Ids.Add(Id);
-                        Names.Add(Name);
-                        Descriptions.Add(Description);
-                        Species.Add(Species2);
-                        FirstAppeared.Add(FirstAppeared2);
-                        YearCreated.Add(year);
+                        characters.Add(character);
                         // log transaction
-                        logger.Info($"Character id {Id} added");
+                        logger.Info($"Character id {character.Id} added");
                     }
                     else
                     {
@@ -126,6 +122,7 @@ else
         {
             // Display All Characters
             // loop thru Lists
+            /*
             for (int i = 0; i < Ids.Count; i++)
             {
                 // display character details
@@ -137,9 +134,9 @@ else
                 Console.WriteLine($"Year Created: {YearCreated[i]}");
                 Console.WriteLine();
             }
+            */
         }
     } while (choice == "1" || choice == "2");
-    */
 }
 
 logger.Info("Program ended");
