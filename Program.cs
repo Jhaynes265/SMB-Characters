@@ -100,7 +100,7 @@ else
                     {
                         // create file from data
                         StreamWriter sw = new(file, true);
-                        sw.WriteLine($"{character.Id},{character.Name},{character.Description}, {character.Species}, {character.Firstappearance}, {character.Yearcreated}");
+                        sw.WriteLine($"{character.Id},{character.Name},{character.Description},{character.Species},{character.Firstappearance},{character.Yearcreated}");
                         sw.Close();
                         // add new character details to Lists
                         characters.Add(character);
